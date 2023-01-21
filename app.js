@@ -43,11 +43,11 @@ export default (express, bodyParser, createReadStream, crypto, http) => {
 
   app.post('/insert/', async (req, res) => {
     const { connection } = await mongoose.connect(req.body.URL);
-
+    console.log(req.body);
     await new User({ login: req.body.login, password: req.body.password }).save();
 
     connection.close();
-    res.send('done');
+    res.end();
   });
 
   return app;
