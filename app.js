@@ -37,8 +37,6 @@ export default (express, bodyParser, createReadStream, crypto, http) => {
     })
   });
 
-  app.all('*', (req, res) => res.send('itmo336261'));
-
   const User = mongoose.model('User', { login: String, password: String });
 
   app.post('/insert/', async (req, res) => {
@@ -50,5 +48,7 @@ export default (express, bodyParser, createReadStream, crypto, http) => {
     res.end();
   });
 
+  app.all('*', (req, res) => res.send('itmo336261'));
+  
   return app;
 }
