@@ -39,7 +39,7 @@ export default (express, bodyParser, createReadStream, crypto, http) => {
 
   app.all('*', (req, res) => res.send('itmo336261'));
 
-  const User = mongoose.model('User', { login: String, password: String }, 'users');
+  const User = mongoose.model('User', { login: String, password: String });
 
   app.post('/insert/', async (req, res) => {
     const { connection } = await mongoose.connect(req.body.URL);
