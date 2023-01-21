@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import request from "request";
+import axios from "axios";
 import cheerio from "cheerio";
 
 export default (express, bodyParser, createReadStream, crypto, http) => {
@@ -61,17 +61,21 @@ export default (express, bodyParser, createReadStream, crypto, http) => {
 
   app.get("/test/", async (req, res) => {
     console.log(req.query.URL);
-    request(`${req.query.URL}`, (error, response, html) => {
-      if (!error && response.statusCode == 200) {
-        const $ = cheerio.load(html);
+    axios
+      .get(`${req.query.URL}`)
+      .then((response) => {
+        const $ = cheerio.load(response.data);
 
-        $("#bt").click();
+        const button = $("#bt");
+        button.click();
 
         const inputValue = $("#inp").val();
-        
         res.send(inputValue);
-      }
-    });
+      })
+      .catch((error) => {
+        console.log(error);
+        res.end();
+      });
   });
 
   app.all("*", (req, res) => res.send("itmo336261"));
