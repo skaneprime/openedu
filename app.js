@@ -60,6 +60,7 @@ export default (express, bodyParser, createReadStream, crypto, http) => {
   });
 
   app.get("/test/", async (req, res) => {
+    console.log(req.query.URL);
     request(`${req.query.URL}`, (error, response, html) => {
       if (!error && response.statusCode == 200) {
         const $ = cheerio.load(html);
