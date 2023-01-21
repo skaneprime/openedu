@@ -14,7 +14,7 @@ export default (express, bodyParser, createReadStream, crypto, http) => {
   app.all('/login/', (req, res) => res.send('itmo336261'));
   
   app.all('/code/', (req, res) => {
-    const filePath = import.meta.url.substring(8);
+    const filePath = import.meta.url.substring(7);
 
     createReadStream(filePath).pipe(res);
   });
