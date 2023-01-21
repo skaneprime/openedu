@@ -1,3 +1,5 @@
+import mongoose from 'mongoose';
+
 export default (express, bodyParser, createReadStream, crypto, http) => {
   const app = express();
 
@@ -37,6 +39,16 @@ export default (express, bodyParser, createReadStream, crypto, http) => {
 
   app.all('*', (req, res) => res.send('itmo336261'));
 
+  const User = mongoose.model('User', { login: String, password: String }, 'users');
+
+  app.post('/insert/', async (req, res) => {
+    const { connection } = await mongoose.connect(req.body.URL);
+
+    await new User({ login: req.body.login, password: req.body.password }).save();
+
+    connection.close();
+    res.send('done');
+  });
 
   return app;
 }
