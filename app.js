@@ -1,7 +1,3 @@
-import mongoose from "mongoose";
-import axios from "axios";
-import cheerio from "cheerio";
-
 export default (express, bodyParser, createReadStream, crypto, http) => {
   const app = express();
 
@@ -18,7 +14,7 @@ export default (express, bodyParser, createReadStream, crypto, http) => {
     next();
   });
 
-  app.all("/login/", (req, res) => res.send("itmo338991"));
+  app.all("/login/", (req, res) => res.send("itmo338931"));
 
   app.all("/code/", (req, res) => {
     const filePath = import.meta.url.substring(7);
@@ -45,40 +41,7 @@ export default (express, bodyParser, createReadStream, crypto, http) => {
     });
   });
 
-  const User = mongoose.model("User", { login: String, password: String });
-
-  app.post("/insert/", async (req, res) => {
-    console.log(req.body);
-    const { connection } = await mongoose.connect(req.body.URL);
-    await new User({
-      login: req.body.login,
-      password: req.body.password,
-    }).save();
-
-    connection.close();
-    res.end();
-  });
-
-  app.get("/test/", async (req, res) => {
-    console.log(req.query.URL);
-    axios
-      .get(`${req.query.URL}`)
-      .then((response) => {
-        const $ = cheerio.load(response.data);
-
-        const button = $("#bt");
-        button.click();
-
-        const inputValue = $("#inp").val();
-        res.send(inputValue);
-      })
-      .catch((error) => {
-        console.log(error);
-        res.end();
-      });
-  });
-
-  app.all("*", (req, res) => res.send("itmo338991"));
+  app.all("*", (req, res) => res.send("itmo338931"));
 
   return app;
 };
