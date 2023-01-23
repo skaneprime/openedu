@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import crypto from 'crypto';
 import http from 'http';
 import { createReadStream } from 'fs'
-import appSrc from './app';
+import appSrc from './app.js';
 
 const PORT = process.env.PORT || 3002;
 const app = appSrc(express, bodyParser, createReadStream, crypto, http);
