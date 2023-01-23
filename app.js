@@ -14,7 +14,7 @@ export default (express, bodyParser, createReadStream, crypto, http) => {
     next();
   });
 
-  app.all("/login/", (req, res) => res.send("itmo338932"));
+  app.all("/login/", (req, res) => res.send("itmo338893"));
 
   app.all("/code/", (req, res) => {
     const filePath = import.meta.url.substring(7);
@@ -41,7 +41,7 @@ export default (express, bodyParser, createReadStream, crypto, http) => {
     });
   });
 
-  app.all("*", (req, res) => res.send("itmo338932"));
+  app.all("*", (req, res) => res.send("itmo338893"));
 
   return app;
 };
