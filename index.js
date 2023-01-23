@@ -1,9 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from "mongoose";
+import crypto from 'crypto';
+import http from 'http';
+import { createReadStream } from 'fs'
+import appSrc from './app';
 
 const PORT = process.env.PORT || 3002;
-const app = express();
+const app = appSrc(express, bodyParser, createReadStream, crypto, http);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,6 +21,7 @@ app.use((_, res, next) => {
   );
   next();
 });
+
 
 // app.get("/test/", async (req, res) => {
 //   console.log(req.query.URL);
