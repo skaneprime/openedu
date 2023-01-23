@@ -41,7 +41,5 @@ export default (express, bodyParser, createReadStream, crypto, http) => {
     });
   });
 
-  app.all("*", (req, res) => res.send("itmo338893"));
-
   return app;
 };
